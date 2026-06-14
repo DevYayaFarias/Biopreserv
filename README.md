@@ -151,10 +151,10 @@ biopreserv/biopreserv.ino
 
 | Nome | Contato |
 |---|---|
-| Gabriela Estefania Uzcategui Perez | [email] |
-| Heitor Roberto Gonçalves | [email] |
-| João Pedro Vicentini Couto | [email] |
-| Yasmin Victória Farias Leal | [email] |
+| Gabriela Estefania Uzcategui Perez | gabrielauzcategui81@gmail.com |
+| Heitor Roberto Gonçalves | heitorgoncalves142@gmail.com |
+| João Pedro Vicentini Couto | joaolivro870@gmail.com |
+| Yasmin Victória Farias Leal | minvicflg@gmail.com |
 
 ---
 
