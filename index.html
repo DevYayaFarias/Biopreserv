@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Biopreserv Dashboard - Advanced</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header class="top-header">
+        <div class="header-content">
+            <h1 class="logo-title">BIOPRESERV</h1>
+            <p class="subtitle">Sistema Preditivo de Detecção de Mofo | <span class="highlight btn-sobre" id="open-modal">Sobre</span></p>
+            <div class="header-icon" id="toggle-view-btn" title="Alternar Visão">
+                <i class="fa-solid fa-arrow-right" id="toggle-icon"></i>
+            </div>
+        </div>
+    </header>
+
+    <main class="dashboard-container">
+        
+        <div class="metrics-header-wrapper">
+            <div class="metrics-top-bar">
+                <div class="wifi-status hidden" id="wifi-badge">
+                    <span class="wifi-text">Modo Wi-Fi: <span class="highlight-green"><i class="fa-solid fa-wifi"></i> AP + STA Online</span></span>
+                </div>
+            </div>
+            
+            <section class="metrics-grid">
+                <div class="metric-card">
+                    <div class="card-label">TEMPERATURA</div>
+                    <div class="card-value">00.0</div>
+                    <div class="card-unit">°C</div>
+                    <div class="badge badge-normal">NORMAL</div>
+                </div>
+                <div class="metric-card">
+                    <div class="card-label">UMIDADE</div>
+                    <div class="card-value">86</div>
+                    <div class="card-unit">%</div>
+                    <div class="badge badge-warning">RISCO</div>
+                </div>
+                <div class="metric-card">
+                    <div class="card-label">QUALIDADE DO AR</div>
+                    <div class="card-value">589</div>
+                    <div class="card-unit">ppm</div>
+                    <div class="badge badge-normal">NORMAL</div>
+                </div>
+                <div class="metric-card">
+                    <div class="card-label">STATUS</div>
+                    <div class="card-value">RISCO</div>
+                    <div class="card-unit">Última:</div>
+                    <div class="badge badge-warning">ATENÇÃO</div>
+                </div>
+            </section>
+        </div>
+
+        <div id="simple-view">
+            <section class="panel">
+                <h2 class="panel-title">Alertas e Eventos</h2>
+                <div class="alerts-container">
+                    <div class="alert-box alert-yellow">
+                        <span class="dot dot-yellow"></span>
+                        <span class="alert-text">Temperatura alta</span>
+                    </div>
+                    <div class="alert-box alert-red">
+                        <span class="dot dot-red"></span>
+                        <span class="alert-text">Qualidade do ar comprometida!</span>
+                    </div>
+                </div>
+            </section>
+
+            <section class="panel">
+                <h2 class="panel-title">Configurações do Sistema</h2>
+                <div class="config-grid">
+                    <div class="config-box">
+                        <h3 class="box-title">Limiares críticos</h3>
+                        <div class="input-group">
+                            <label>UMIDADE MÁXIMA (%)</label>
+                            <input type="text" value="">
+                        </div>
+                        <div class="input-group">
+                            <label>TEMPERATURA MÁXIMA (°C)</label>
+                            <input type="text" value="">
+                        </div>
+                        <div class="input-group">
+                            <label>QUALIDADE DO AR MÁXIMA</label>
+                            <input type="text" value="">
+                        </div>
+                        <button class="btn-save">SALVAR CONFIGURAÇÕES</button>
+                    </div>
+
+                    <div class="config-box">
+                        <h3 class="box-title">Controle de Atuadores</h3>
+                        <p class="box-subtitle">Ativar/ Desativar manualmente</p>
+                        <div class="toggle-group">
+                            <button class="btn-toggle" data-device="VENTOINHA">VENTOINHA OFF</button>
+                            <button class="btn-toggle active" data-device="BUZZER">BUZZER: OFF</button>
+                            <button class="btn-toggle" data-device="LED">LED: OFF</button>
+                        </div>
+                    </div>
+
+                    <div class="config-box">
+                        <h3 class="box-title">Informações</h3>
+                        <p class="box-subtitle">Tempo de funcionamento</p>
+                        <div class="uptime-display">1h 48m</div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <div id="advanced-view" class="hidden">
+            
+            <section class="panel adv-panel">
+                <div class="adv-header">
+                    <div>
+                        <h2 class="panel-title mb-0">SINAL RSSI & LATÊNCIA (TEMPO REAL)</h2>
+                        <p class="panel-subtitle">Monitoramento de link aéreo temporal no barramento de rádio</p>
+                    </div>
+                    <div class="chart-legend">
+                        <span class="legend-item"><span class="dot-legend dot-cyan"></span> Sinal (dBm)</span>
+                        <span class="legend-item"><span class="dot-legend dot-blue"></span> Latência (ms)</span>
+                    </div>
+                </div>
+                <div class="chart-container">
+                    <div class="y-axis">
+                        <span>0</span><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span>
+                    </div>
+                    <div class="chart-area">
+                        <svg viewBox="0 0 1000 150" preserveAspectRatio="none" class="chart-svg">
+                            <path d="M0,60 Q50,70 100,55 T200,65 T300,50 T400,60 T500,45 T600,55 T700,50 T800,60 T900,40 T1000,50" fill="none" stroke="var(--color-cyan)" stroke-width="2"/>
+                            <path d="M0,80 Q50,90 100,75 T200,95 T300,80 T400,90 T500,75 T600,85 T700,90 T800,100 T900,80 T1000,85" fill="none" stroke="var(--color-blue-chart)" stroke-width="2" stroke-dasharray="4,4"/>
+                        </svg>
+                        <div class="x-axis">
+                            <span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span><span>9</span><span>10</span><span>11</span><span>12</span><span>13</span><span>14</span><span>15</span><span>16</span><span>17</span><span>18</span><span>19</span><span>20</span><span>21</span><span>22</span><span>23</span><span>24</span><span>25</span><span>26</span><span>27</span><span>28</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="panel adv-panel">
+                <h2 class="panel-title">ESTADO FÍSICO DA MCU</h2>
+                
+                <div class="progress-item">
+                    <div class="progress-labels">
+                        <span class="prog-name">Núcleo 0 (Processamento IO)</span>
+                        <span class="prog-val text-cyan">11%</span>
+                    </div>
+                    <div class="progress-track"><div class="progress-fill fill-cyan" style="width: 11%"></div></div>
+                </div>
+
+                <div class="progress-item">
+                    <div class="progress-labels">
+                        <span class="prog-name">Núcleo 1 (Predição/Sensoriamento)</span>
+                        <span class="prog-val text-cyan">45%</span>
+                    </div>
+                    <div class="progress-track"><div class="progress-fill fill-cyan" style="width: 45%"></div></div>
+                </div>
+
+                <div class="progress-item">
+                    <div class="progress-labels">
+                        <span class="prog-name">Interna: SRAM (Heap de Dados)</span>
+                        <span class="prog-val text-white">67% de 320KB</span>
+                    </div>
+                    <div class="progress-track"><div class="progress-fill fill-gray" style="width: 67%"></div></div>
+                </div>
+
+                <div class="progress-item">
+                    <div class="progress-labels">
+                        <span class="prog-name">Armazenamento (Buffer de Logs)</span>
+                        <span class="prog-val text-purple">12% de 4MB</span>
+                    </div>
+                    <div class="progress-track"><div class="progress-fill fill-purple" style="width: 12%"></div></div>
+                </div>
+
+                <div class="mcu-info-card">
+                    <i class="fa-solid fa-microchip mcu-icon"></i>
+                    <div class="mcu-details">
+                        <span class="mcu-title">ESP_WROOM_32</span>
+                        <span class="mcu-sub">Frequência: 240MHz</span>
+                    </div>
+                    <div class="mcu-status-dots">
+                        <span class="dot-legend dot-cyan"></span>
+                        <span class="dot-legend dot-green"></span>
+                    </div>
+                </div>
+            </section>
+
+            <section class="panel adv-panel">
+                <div class="adv-header">
+                    <div>
+                        <h2 class="panel-title mb-0">AGENDADOR FREERTOS (ACTIVE SCHEDULERS)</h2>
+                        <p class="panel-subtitle">Dados reais extraídos da struct TaskStatus_t</p>
+                    </div>
+                    <div class="ticks-info">Ticks: 849184</div>
+                </div>
+                
+                <table class="rtos-table">
+                    <thead>
+                        <tr>
+                            <th>TASK NAME</th>
+                            <th>CORE</th>
+                            <th>STATE</th>
+                            <th>PRIORITY</th>
+                            <th>WATERMARK STACK</th>
+                            <th>CPU UTILIZATION</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="font-mono">vTaskMqttPredict</td>
+                            <td>Core 1</td>
+                            <td><span class="rtos-badge badge-running">Running</span></td>
+                            <td>5</td>
+                            <td>4096B</td>
+                            <td class="text-cyan">21%</td>
+                        </tr>
+                        <tr>
+                            <td class="font-mono">vTaskWifiKeep</td>
+                            <td>Core 0</td>
+                            <td><span class="rtos-badge badge-blocked">Blocked</span></td>
+                            <td>3</td>
+                            <td>2048B</td>
+                            <td class="text-cyan">3%</td>
+                        </tr>
+                        <tr>
+                            <td class="font-mono">vTaskSensorsPoll</td>
+                            <td>Core 1</td>
+                            <td><span class="rtos-badge badge-ready">Ready</span></td>
+                            <td>4</td>
+                            <td>1036B</td>
+                            <td class="text-cyan">9%</td>
+                        </tr>
+                        <tr>
+                            <td class="font-mono">vTaskWebserver</td>
+                            <td>Core 0</td>
+                            <td><span class="rtos-badge badge-ready">Ready</span></td>
+                            <td>2</td>
+                            <td>3072B</td>
+                            <td class="text-cyan">16%</td>
+                        </tr>
+                        <tr>
+                            <td class="font-mono">vTaskOledGUI</td>
+                            <td>Core 0</td>
+                            <td><span class="rtos-badge badge-blocked">Blocked</span></td>
+                            <td>1</td>
+                            <td>1024B</td>
+                            <td class="text-cyan">1%</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <section class="panel adv-panel">
+                <h2 class="panel-title mb-1">TIME PROFILER DE FUNÇÕES (LATÊNCIA UNITÁRIA DE SOFTWARE)</h2>
+                
+                <div class="profiler-list">
+                    <div class="profiler-item">
+                        <div class="prof-header">
+                            <span class="font-mono">autoPredictor()</span>
+                            <span class="prof-dur">Duração: <span class="text-white font-bold">125 ms</span></span>
+                        </div>
+                        <div class="progress-track track-dark"><div class="progress-fill fill-cyan" style="width: 100%"></div></div>
+                    </div>
+                    <div class="profiler-item">
+                        <div class="prof-header">
+                            <span class="font-mono">readBME280()</span>
+                            <span class="prof-dur">Duração: <span class="text-white font-bold">52 ms</span></span>
+                        </div>
+                        <div class="progress-track track-dark"><div class="progress-fill fill-cyan" style="width: 45%"></div></div>
+                    </div>
+                    <div class="profiler-item">
+                        <div class="prof-header">
+                            <span class="font-mono">writeNVS()</span>
+                            <span class="prof-dur">Duração: <span class="text-white font-bold">120 ms</span></span>
+                        </div>
+                        <div class="progress-track track-dark"><div class="progress-fill fill-gray" style="width: 95%"></div></div>
+                    </div>
+                    <div class="profiler-item">
+                        <div class="prof-header">
+                            <span class="font-mono">mqttClient()</span>
+                            <span class="prof-dur">Duração: <span class="text-white font-bold">30 ms</span></span>
+                        </div>
+                        <div class="progress-track track-dark"><div class="progress-fill fill-gray" style="width: 25%"></div></div>
+                    </div>
+                    <div class="profiler-item">
+                        <div class="prof-header">
+                            <span class="font-mono">calcVariance()</span>
+                            <span class="prof-dur">Duração: <span class="text-white font-bold">42 ms</span></span>
+                        </div>
+                        <div class="progress-track track-dark"><div class="progress-fill fill-cyan" style="width: 35%"></div></div>
+                    </div>
+                </div>
+
+                <div class="alert-inline mt-4">
+                    <i class="fa-solid fa-triangle-exclamation text-yellow"></i>
+                    <span>A resolução de latência utiliza o timer de alta resolução `esp_timer_get_time()` com amostragem por clock.</span>
+                </div>
+            </section>
+
+            <section class="panel adv-panel">
+                <div class="adv-header">
+                    <h2 class="panel-title mb-0">MONITOR SERIAL DE DEPURAÇÃO</h2>
+                    <div class="terminal-controls">
+                        <input type="text" class="terminal-search" placeholder="Filtrar por texto...">
+                        <label class="cb-container"><input type="checkbox" checked><span class="cb-mark cb-info"></span> INFO</label>
+                        <label class="cb-container"><input type="checkbox" checked><span class="cb-mark cb-warn"></span> WARN</label>
+                        <label class="cb-container"><input type="checkbox" checked><span class="cb-mark cb-err"></span> ERROR</label>
+                        <button class="btn-export"><i class="fa-solid fa-download"></i> Exportar CSV</button>
+                    </div>
+                </div>
+                <p class="panel-subtitle mb-3">Logs capturados via UART0 em tempo de execução</p>
+                
+                <div class="terminal-window">
+<pre><code><span class="log-time">[11:35:03]</span> <span class="log-info">INFO</span> <span class="log-msg">Inicializando SPIFFS no barramento Flash...</span>
+<span class="log-time">[11:35:04]</span> <span class="log-info">INFO</span> <span class="log-msg">Conexão Wi-Fi estabelecida no IP: 192.168.1.52</span>
+<span class="log-time">[11:35:06]</span> <span class="log-warn">WARN</span> <span class="log-msg">Alocação DRAM alta: Heap de logs iniciado na PSRAM.</span>
+<span class="log-time">[11:35:08]</span> <span class="log-info">INFO</span> <span class="log-msg">DHT22 detectado no barramento GPIO 4 de dados.</span>
+<span class="log-time">[11:35:10]</span> <span class="log-info">INFO</span> <span class="log-msg">Task vTaskMqttPredict criada no core 1 com sucesso.</span>
+<span class="log-time">[14:32:17]</span> <span class="log-error">ERROR</span> <span class="log-msg">Falha de CRC no cabeçalho do frame do DHT22!</span>
+<span class="log-time">[14:32:45]</span> <span class="log-error">ERROR</span> <span class="log-msg">Erro de handshaking na porta segura da API REST.</span>
+<span class="log-time">[14:32:55]</span> <span class="log-error">ERROR</span> <span class="log-msg">Falha de CRC no cabeçalho do frame do DHT22!</span>
+<span class="log-time">[14:32:57]</span> <span class="log-error">ERROR</span> <span class="log-msg">Memory leak detectado em FreeRTOS Queue_Receive!</span>
+<span class="log-time">[14:33:01]</span> <span class="log-error">ERROR</span> <span class="log-msg">Sem sinal de resposta do barramento no pino GPIO 34.</span></code></pre>
+                </div>
+            </section>
+
+            <div class="adv-bottom-grid">
+                <section class="panel adv-panel">
+                    <h2 class="panel-title">AJUSTES FÍSICOS DOS SENSORES</h2>
+                    
+                    <div class="slider-group">
+                        <div class="slider-header">
+                            <label>Frequência de Leitura dos Sensores</label>
+                            <span class="slider-val text-cyan font-bold">27 segundos</span>
+                        </div>
+                        <input type="range" class="slider-cyan" min="1" max="60" value="27">
+                        <p class="slider-help">Define a taxa de polling do microcontrolador nos barramentos I2C e OneWire.</p>
+                    </div>
+
+                    <div class="slider-group">
+                        <div class="slider-header">
+                            <label>Limiar Máximo de Umidade (Alerta)</label>
+                            <span class="slider-val text-yellow font-bold">54 % UR</span>
+                        </div>
+                        <input type="range" class="slider-yellow" min="0" max="100" value="54">
+                        <p class="slider-help">Se a umidade relativa superar o valor definido, o sistema inicia o cálculo de condensação.</p>
+                    </div>
+
+                    <div class="slider-group">
+                        <div class="slider-header">
+                            <label>Limiar de CO2 (Risco Biológico)</label>
+                            <span class="slider-val text-red font-bold">200 PPM</span>
+                        </div>
+                        <input type="range" class="slider-red" min="0" max="1000" value="200">
+                        <p class="slider-help">Níveis críticos indicam ambientes propícios à proliferação de fungos.</p>
+                    </div>
+
+                    <div class="manual-control-mt">
+                        <label class="label-sm">CONTROLE MANUAL DOS GPIOS</label>
+                        <div class="gpios-grid">
+                            <button class="btn-gpio">LED: OFF</button>
+                            <button class="btn-gpio">VENTOINHA: OFF</button>
+                            <button class="btn-gpio">BUZZER: OFF</button>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="panel adv-panel">
+                    <h2 class="panel-title">MAPEAMENTO DINÂMICO DE WI-FI</h2>
+                    <p class="panel-subtitle mb-4">Altere as credenciais do roteador diretamente na RAM do microcontrolador sem perder os dados flash gravados.</p>
+                    
+                    <div class="input-group-adv">
+                        <label>SSID da Rede (Acesso do Cliente)</label>
+                        <input type="text" placeholder="Ex: RedeCasa_2G">
+                    </div>
+                    
+                    <div class="input-group-adv">
+                        <label>Senha do Ponto de Acesso</label>
+                        <input type="password" value="********">
+                    </div>
+
+                    <div class="alert-box-adv alert-yellow mt-4 mb-4">
+                        <i class="fa-solid fa-triangle-exclamation text-yellow mr-2"></i>
+                        <span class="alert-text-adv">Ao enviar, o ESP32 tentará realizar a reconexão. Se a conexão falhar, o Portal de Captive Access Point temporário será reaberto automaticamente no IP 192.168.4.1.</span>
+                    </div>
+
+                    <button class="btn-reconnect w-100">RECONECTAR MÓDULO DE RÁDIO</button>
+                </section>
+            </div>
+        </div>
+
+    </main>
+
+    <footer class="bottom-footer">
+        <hr class="footer-divider">
+        <p class="footer-text"><strong>Biopreserv v1.0</strong> | Otimizado para ESP32</p>
+        <p class="footer-text sub-text">Monitoramento preditivo e detecção de mofo</p>
+    </footer>
+
+    <div class="modal-overlay" id="sobre-modal">
+        <div class="modal-box">
+            <h2 class="modal-title">Sobre & Projeto</h2>
+            <p class="modal-description">
+                O BIOPRESERV é uma solução fundamentada na Internet das Coisas (IoT), projetada para monitorar continuamente dados ambientais. Seu objetivo é identificar e prevenir condições que favoreçam o crescimento de fungos.
+            </p>
+            <div class="modal-details">
+                <div class="detail-row">
+                    <div class="detail-label">Instituição:</div>
+                    <div class="detail-value font-bold">PUCPR - Pontifícia Universidade Católica do Paraná</div>
+                </div>
+                <div class="detail-row">
+                    <div class="detail-label">Equipe de desenvolvimento:</div>
+                    <div class="detail-value">
+                        <ul>
+                            <li>Gabriela Estefania Uzcategui Perez</li>
+                            <li>Heitor Roberto Goncalves</li>
+                            <li>João Pedro Vicentini Couto</li>
+                            <li>Yasmin Victória Farias Leal</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="detail-row">
+                    <div class="detail-label">E-mail de Contato:</div>
+                    <div class="detail-value">
+                        <ul>
+                            <li>gabrielauzcategui81@gmail.com</li>
+                            <li>heitorgoncalves142@gmail.com</li>
+                            <li>joaolivro870@gmail.com</li>
+                            <li>minvicflg@gmail.com</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="detail-row">
+                    <div class="detail-label">Repositório Técnico:</div>
+                    <div class="detail-value">https://github.com/DevYayaFarias/Biopreserv</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
