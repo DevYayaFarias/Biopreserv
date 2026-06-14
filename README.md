@@ -87,19 +87,11 @@ Acesse o sistema diretamente pelo navegador, sem precisar instalar nada. A inter
 
 ```
 biopreserv/
-├── biopreserv/
-│   └── biopreserv.ino          # Arquivo principal do firmware
-├── src/
-│   ├── sensors/                # Módulos dos sensores (DHT22, MQ-135)
-│   ├── actuators/              # Módulos dos atuadores (servo, relé, cooler)
-│   ├── tasks/                  # Tasks FreeRTOS
-│   ├── web/                    # Interface web embarcada (HTML/CSS/JS)
-│   ├── storage/                # Persistência de dados
-│   ├── logs/                   # Sistema de logs
-│   └── energy/                 # Gerenciamento de energia
-├── docs/                       # Documentação acadêmica (ABNT)
-├── tests/                      # Testes isolados e de integração
-└── README.md
+├── index.html/      # Arquivo HTML da interface   
+├── script.js    # Arquivo JS da interface                                
+├── style.css    # Arquivo CSS da interface                       
+├── tde_cps_esp32.ino    # Arquivo principal do firmware                 
+└── README.md            # Arquivo de instrução
 ```
 
 ---
