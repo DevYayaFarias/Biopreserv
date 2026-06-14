@@ -154,6 +154,7 @@ biopreserv/biopreserv.ino
 | Gabriela Estefania Uzcategui Perez | gabrielauzcategui81@gmail.com |
 | Heitor Roberto Gonçalves | heitorgoncalves142@gmail.com |
 | João Pedro Vicentini Couto | joaolivro870@gmail.com |
+| Rafaella da Silva Butture | rafaeladasilvabutture@gmail.com |
 | Yasmin Victória Farias Leal | minvicflg@gmail.com |
 
 ---
