@@ -111,7 +111,7 @@ biopreserv/
 
 ```bash
 # Clone o repositório
-git clone https://github.com/seu-usuario/biopreserv.git
+git clone https://github.com/DevYayaFarias/biopreserv.git
 
 # Abra o arquivo principal na Arduino IDE
 biopreserv/biopreserv.ino
